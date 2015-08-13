@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+  
+<!-- contents of actual zeppelin-site.xml -->
+
+ <property>
+  <name>zeppelin.server.addr</name>
+  <value>0.0.0.0</value>
+  <description>Server address</description>
+</property>
+
+<property>
+  <name>zeppelin.server.port</name>
+  <value>9995</value>
+  <description>Server port.The subsequent port (e.g. 9996) should also be open as it will be used by the web socket</description>
+</property>
+
+ <property>
+  <name>zeppelin.websocket.addr</name>
+  <value>0.0.0.0</value>
+  <description>Websocket address</description>
+</property> 
+
+<property>
+  <name>zeppelin.websocket.port</name>
+  <value>9996</value>
+  <description>If the port value is negative, then it'll default to the server port + 1.</description>
+</property>
+
+<property>
+  <name>zeppelin.notebook.dir</name>
+  <value>notebook</value>
+  <description>notebook persist</description>
+</property>
+
+<property>
+  <name>zeppelin.notebook.storage</name>
+  <value>org.apache.zeppelin.notebook.repo.VFSNotebookRepo</value>
+  <description>notebook persistence layer implementation. If S3 is used, set this to org.apache.zeppelin.notebook.repo.S3NotebookRepo instead.  If S3 is used to store the notebooks, it is necessary to use the following folder structure bucketname/username/notebook/</description>
+</property>
+
+<property>
+  <name>zeppelin.notebook.s3.user</name>
+  <value>user</value>
+  <description>user name for s3 folder structure. If S3 is used to store the notebooks, it is necessary to use the following folder structure bucketname/username/notebook/</description>
+</property>
+
+<property>
+  <name>zeppelin.notebook.s3.bucket</name>
+  <value>zeppelin</value>
+  <description>bucket name for notebook storage. If S3 is used to store the notebooks, it is necessary to use the following folder structure bucketname/username/notebook/</description>
+</property>
+
+<property>
+  <name>zeppelin.interpreter.dir</name>
+  <value>interpreter</value>
+  <description>Interpreter implementation base directory</description>
+</property>
+
+<property>
+  <name>zeppelin.interpreters</name>
+  <value>org.apache.zeppelin.spark.SparkInterpreter,org.apache.zeppelin.spark.PySparkInterpreter,org.apache.zeppelin.spark.SparkSqlInterpreter,org.apache.zeppelin.spark.DepInterpreter,org.apache.zeppelin.markdown.Markdown,org.apache.zeppelin.angular.AngularInterpreter,org.apache.zeppelin.shell.ShellInterpreter,org.apache.zeppelin.hive.HiveInterpreter,org.apache.zeppelin.tajo.TajoInterpreter,org.apache.zeppelin.flink.FlinkInterpreter,org.apache.zeppelin.lens.LensInterpreter,org.apache.zeppelin.ignite.IgniteInterpreter,org.apache.zeppelin.ignite.IgniteSqlInterpreter</value>
+  <description>Comma separated interpreter configurations. First interpreter become a default</description>
+</property>
+
+<property>
+  <name>zeppelin.interpreter.connect.timeout</name>
+  <value>30000</value>
+  <description>Interpreter process connect timeout in msec.</description>
+</property>
+
+<property>
+  <name>zeppelin.ssl</name>
+  <value>false</value>
+  <description>Should SSL be used by the servers?</description>
+</property>
+
+
+<property>
+  <name>zeppelin.ssl.client.auth</name>
+  <value>false</value>
+  <description>Should client authentication be used for SSL connections?</description>
+</property>
+
+<property>
+  <name>zeppelin.ssl.keystore.path</name>
+  <value>conf/keystore</value>
+  <description>Path to keystore relative to Zeppelin home</description>
+</property>
+
+<property>
+  <name>zeppelin.ssl.keystore.type</name>
+  <value>JKS</value>
+  <description>The format of the given keystore (e.g. JKS or PKCS12)</description>
+</property>
+
+<property>
+  <name>zeppelin.ssl.keystore.password</name>
+  <value>change me</value>
+  <description>Keystore password. Can be obfuscated by the Jetty Password tool</description>
+</property>
+
+
+<property>
+  <name>zeppelin.ssl.key.manager.password</name>
+  <value>change me</value>
+  <description>Key Manager password. Defaults to keystore password. Can be obfuscated.</description>
+</property>
+
+
+<property>
+  <name>zeppelin.ssl.truststore.path</name>
+  <value>conf/truststore</value>
+  <description>Path to truststore relative to Zeppelin home. Defaults to the keystore path</description>
+</property>
+
+<property>
+  <name>zeppelin.ssl.truststore.type</name>
+  <value>JKS</value>
+  <description>The format of the given truststore (e.g. JKS or PKCS12). Defaults to the same type as the keystore type</description>
+</property>
+
+
+<property>
+  <name>zeppelin.ssl.truststore.password</name>
+  <value>change me</value>
+  <description>Truststore password. Can be obfuscated by the Jetty Password tool. Defaults to the keystore password</description>
+</property>
+
+
+
+
+</configuration>
+
