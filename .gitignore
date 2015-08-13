@@ -1,0 +1,8 @@
+*.tar.gz
+.gradle
+.classpath
+.settings
+.project
+.pydevproject
+build/
+target/
