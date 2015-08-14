@@ -1,6 +1,53 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.privotal.ambari</groupId>
+  <groupId>io.pivotal</groupId>
   <artifactId>zeppelin-ambari-plugin</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.5</version>
+  <name>zeppelin-ambari-plugin</name>
+  <url>http://maven.apache.org</url>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.fortasoft</groupId>
+        <artifactId>gradle-maven-plugin</artifactId>
+        <version>1.0.7</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>invoke</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <tasks>
+            <task>clean</task>
+            <task>dist</task>
+          </tasks>
+          <args>
+            <arg>-PbuildDir=target</arg>
+          </args>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <!-- Use a temproal/custom maven repo until 
+  the gradle-maven-plugin:1.0.7 get published in Maven Central -->
+  <pluginRepositories>
+    <pluginRepository>
+      <id>bintray</id>
+      <url>https://dl.bintray.com/big-data/maven</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.fortasoft</groupId>
+        <artifactId>gradle-maven-plugin</artifactId>
+        <version>1.0.7</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>

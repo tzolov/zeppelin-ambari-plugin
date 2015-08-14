@@ -2,7 +2,6 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
  
 <configuration>
-
   
 <!-- contents of actual zeppelin-site.xml -->
 
@@ -15,19 +14,7 @@
 <property>
   <name>zeppelin.server.port</name>
   <value>9995</value>
-  <description>Server port.The subsequent port (e.g. 9996) should also be open as it will be used by the web socket</description>
-</property>
-
- <property>
-  <name>zeppelin.websocket.addr</name>
-  <value>0.0.0.0</value>
-  <description>Websocket address</description>
-</property> 
-
-<property>
-  <name>zeppelin.websocket.port</name>
-  <value>9996</value>
-  <description>If the port value is negative, then it'll default to the server port + 1.</description>
+  <description>Server port.</description>
 </property>
 
 <property>
@@ -45,13 +32,13 @@
 <property>
   <name>zeppelin.notebook.s3.user</name>
   <value>user</value>
-  <description>user name for s3 folder structure. If S3 is used to store the notebooks, it is necessary to use the following folder structure bucketname/username/notebook/</description>
+  <description>user name for s3 folder structure</description>
 </property>
 
 <property>
   <name>zeppelin.notebook.s3.bucket</name>
   <value>zeppelin</value>
-  <description>bucket name for notebook storage. If S3 is used to store the notebooks, it is necessary to use the following folder structure bucketname/username/notebook/</description>
+  <description>bucket name for notebook storage</description>
 </property>
 
 <property>
@@ -62,7 +49,7 @@
 
 <property>
   <name>zeppelin.interpreters</name>
-  <value>org.apache.zeppelin.spark.SparkInterpreter,org.apache.zeppelin.spark.PySparkInterpreter,org.apache.zeppelin.spark.SparkSqlInterpreter,org.apache.zeppelin.spark.DepInterpreter,org.apache.zeppelin.markdown.Markdown,org.apache.zeppelin.angular.AngularInterpreter,org.apache.zeppelin.shell.ShellInterpreter,org.apache.zeppelin.hive.HiveInterpreter,org.apache.zeppelin.tajo.TajoInterpreter,org.apache.zeppelin.flink.FlinkInterpreter,org.apache.zeppelin.lens.LensInterpreter,org.apache.zeppelin.ignite.IgniteInterpreter,org.apache.zeppelin.ignite.IgniteSqlInterpreter</value>
+  <value>org.apache.zeppelin.spark.SparkInterpreter,org.apache.zeppelin.spark.PySparkInterpreter,org.apache.zeppelin.spark.SparkSqlInterpreter,org.apache.zeppelin.spark.DepInterpreter,org.apache.zeppelin.markdown.Markdown,org.apache.zeppelin.angular.AngularInterpreter,org.apache.zeppelin.shell.ShellInterpreter,org.apache.zeppelin.hive.HiveInterpreter,org.apache.zeppelin.tajo.TajoInterpreter,org.apache.zeppelin.flink.FlinkInterpreter,org.apache.zeppelin.lens.LensInterpreter,org.apache.zeppelin.ignite.IgniteInterpreter,org.apache.zeppelin.ignite.IgniteSqlInterpreter,org.apache.zeppelin.geode.GeodeOqlInterpreter,org.apache.zeppelin.postgresql.PostgreSqlInterpreter</value>
   <description>Comma separated interpreter configurations. First interpreter become a default</description>
 </property>
 
@@ -129,9 +116,6 @@
   <value>change me</value>
   <description>Truststore password. Can be obfuscated by the Jetty Password tool. Defaults to the keystore password</description>
 </property>
-
-
-
 
 </configuration>
 

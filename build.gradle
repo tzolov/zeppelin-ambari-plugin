@@ -1,0 +1,88 @@
+buildscript {
+  repositories { jcenter() }
+
+  dependencies {
+    classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.2.6'
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+  }
+}
+
+apply plugin: 'os-package'
+apply plugin: 'rpm'
+apply plugin: 'distribution'
+apply plugin: 'com.jfrog.bintray'
+
+buildDeb.enabled = false
+buildRpm.enabled = false
+
+def projectName = "zeppelin-ambari-plugin"
+
+ospackage {
+  version = '0.0.5'
+  release = 1
+  arch = NOARCH
+  os = LINUX
+  user 'root'
+  permissionGroup = 'root'
+  packageDescription = 'Zeppelin plugin for Apache Ambari.'
+  packageGroup = 'Applications/Databases'
+  license = 'Apache License v2.0'
+
+  requires('ambari-server', '1.7', GREATER | EQUAL)
+  requires('python', '2.6', GREATER | EQUAL)
+}
+
+bintray {
+  user = System.getenv('BINTRAY_BIGDATA_USER')
+  key = System.getenv('BINTRAY_BIGDATA_KEY')
+
+  dryRun = false
+
+  filesSpec {
+    from ('build/distributions') { include '**/*.rpm' }
+    into projectName
+  }
+
+  pkg {
+    repo = 'rpm'
+    name = projectName
+    desc = 'Ambari Plugin for Apache Zeppelin: http://zeppelin.incubator.apache.org/'
+    licenses = ['Apache-2.0']
+    vcsUrl = 'https://github.com/tzolov/'
+    labels = [
+      'zeppelin',
+      'notebook',
+      'hadoop'
+    ]
+    publicDownloadNumbers = true
+    version {
+      name = ospackage.version + '-' + ospackage.release.toString()
+      desc = 'Ambari Plugin for Apache Zeppelin'
+    }
+  }
+}
+
+task phd30Rpm(type: Rpm) {
+  packageName = projectName + '-phd30'
+  from('src/main/resources/services') { into '/var/lib/ambari-server/resources/stacks/PHD/3.0/services' }
+}
+
+task hdp22Rpm(type: Rpm) {
+  packageName = projectName + '-hdp22'
+  from('src/main/resources/services') { into '/var/lib/ambari-server/resources/stacks/HDP/2.2/services' }
+}
+
+task hdp23Rpm(type: Rpm) {
+  packageName = projectName + '-hdp23'
+  from('src/main/resources/services') { into '/var/lib/ambari-server/resources/stacks/HDP/2.3/services' }
+}
+
+task distTgz(type: Tar) {
+  baseName = projectName + '-' + ospackage.version + '-' + ospackage.release.toString()
+  compression = Compression.GZIP
+  from { 'src/main/resources/services' }
+}
+
+task dist {
+  dependsOn phd30Rpm, hdp22Rpm, hdp23Rpm, distTgz
+}
