@@ -18,7 +18,7 @@ buildRpm.enabled = false
 def projectName = "zeppelin-ambari-plugin"
 
 ospackage {
-  version = '0.0.5'
+  version = '0.0.6'
   release = 1
   arch = NOARCH
   os = LINUX

@@ -36,4 +36,3 @@ master_configs = config['clusterHostInfo']
 
 java64_home = config['hostLevelParams']['java_home']
 ambari_host = str(master_configs['ambari_server_host'][0])
-

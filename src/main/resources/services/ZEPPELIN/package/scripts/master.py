@@ -10,42 +10,42 @@ class Master(Script):
     import status_params
 
     # Create user and group if they don't exist
-    self.create_linux_user(params.zeppelin_user, params.zeppelin_group)
+    try: grp.getgrnam(params.zeppelin_group)
+    except KeyError: Group(group_name=params.zeppelin_group) 
+        
+    try: pwd.getpwnam(params.zeppelin_user)
+    except KeyError: User(username=params.zeppelin_user, 
+                          gid=params.zeppelin_group, 
+                          groups=[params.zeppelin_group], 
+                          ignore_failures=True)    
+
     self.create_hdfs_user(params.zeppelin_user)
 
     # create the log dir if it not already present
     Directory([params.zeppelin_pid_dir, params.zeppelin_log_dir],
-        owner=params.zeppelin_user,
-        group=params.zeppelin_group,
-        recursive=True
-    )
+        owner=params.zeppelin_user, group=params.zeppelin_group, recursive=True)
 
-    Execute('touch ' + params.zeppelin_log_file, user=params.zeppelin_user)    
-    Execute('rm -rf ' + params.zeppelin_dir, ignore_failures=True)
-    Execute('mkdir ' + params.zeppelin_dir)
-    Execute('chown -R ' + params.zeppelin_user + ':' + params.zeppelin_group + ' ' + params.zeppelin_dir)
-    
+    File(params.zeppelin_log_file, owner=params.zeppelin_user, group=params.zeppelin_group)    
+    Directory(params.zeppelin_dir, owner=params.zeppelin_user, group=params.zeppelin_group, recursive=True)
+
     self.install_packages(env)    
-    
+
     # Fetch and unzip snapshot build, if no cached zeppelin tar package exists on Ambari server node
     if not os.path.exists(params.temp_file):
       Execute('wget ' + params.zeppelin_tarball_url + ' -O ' + params.temp_file + ' -a ' + params.zeppelin_log_file, user=params.zeppelin_user)
 
     Execute('tar -zxvf ' + params.temp_file + ' -C ' + params.zeppelin_dir + ' >> ' + params.zeppelin_log_file, user=params.zeppelin_user)
     Execute('mv ' + params.zeppelin_dir + '/*/* ' + params.zeppelin_dir, user=params.zeppelin_user)
+    File(os.path.join(params.zeppelin_dir, 'conf', 'interpreter.json'), action="delete", ignore_failures=True)
     
-    Execute('wget ' + params.zeppelin_notebooks_url + ' -O ' + params.notebook_dir + '/notebooks.tar.gz', user=params.zeppelin_user)
-    Execute('tar -zxvf ' + params.notebook_dir + '/notebooks.tar.gz -C ' + params.zeppelin_dir + ' >> ' + params.zeppelin_log_file, user=params.zeppelin_user)
-    
+    # Install pre-defined notebooks
+    notbooksArchive = os.path.join(params.notebook_dir, 'notebooks.tar.gz')
+    Execute('wget ' + params.zeppelin_notebooks_url + ' -O ' + notbooksArchive , user=params.zeppelin_user)
+    Execute('tar -zxvf ' + notbooksArchive + ' -C ' + params.zeppelin_dir + ' >> ' + params.zeppelin_log_file, user=params.zeppelin_user)
+
     # update the configs specified by user
     self.configure(env)
         
-  def create_linux_user(self, user, group):
-    try: pwd.getpwnam(user)
-    except KeyError: Execute('adduser ' + user)
-    try: grp.getgrnam(group)
-    except KeyError: Execute('groupadd ' + group)
-
   def create_hdfs_user(self, user):
     Execute('hadoop fs -mkdir -p /user/' + user, user='hdfs', ignore_failures=True)
     Execute('hadoop fs -chown ' + user + ' /user/' + user, user='hdfs')
