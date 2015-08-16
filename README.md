@@ -1,15 +1,23 @@
-# Zeppelin Service  for Apache Ambari
+# Zeppelin Service for Apache Ambari [ ![Download](https://api.bintray.com/packages/big-data/rpm/zeppelin-ambari-plugin/images/download.svg) ](https://bintray.com/big-data/rpm/zeppelin-ambari-plugin/_latestVersion)
 
-#### Quick Start  [ ![Download](https://api.bintray.com/packages/big-data/rpm/zeppelin-ambari-plugin/images/download.svg) ](https://bintray.com/big-data/rpm/zeppelin-ambari-plugin/_latestVersion)
+<img align="right" src="https://github.com/tzolov/zeppelin-ambari-plugin/blob/master/doc/images/ZeppelinAmbariService.png" alt="zeppelin-service" width="350"></img>
+[Apache Zeppelin](https://zeppelin.incubator.apache.org/) service for [Apache Ambari](https://ambari.apache.org/). It allows you to install and manage Zeppelin as an Ambari service. The plugin is compatible with Ambari `1.7`, `2.0.x` and `2.1.x` and Stacks: `PHD3.0`, `HDP2.2x` and `HDP2.3`.
+To embed the Zeppleing management pages within Ambari you can use the [Ambari Webpage Embedder](https://github.com/tzolov/ambari-webpage-embedder-view) project.
+
+
+
+> This project builds upon the excellent work done in the [ambari-zeppelin-service](https://github.com/hortonworks-gallery/ambari-zeppelin-service). The original code was significantly refactored to remove some unnecessary functionality and keep the focus only on the Zeppelin service. All assumptions on pre-installed other services are removed. Also is removed the build-on-the-fly functionality. Instead it is expected that the installer will use a pre-build Zeppelin tarball (default tarball is provided). The plugin installation is simplified and one can install it through a public YUM repository. 
+
+#### Quick Start
 Add the Big-Data YUM repository to your CentOS/RedHat system, install the latest Zeppelin plugin RPM and restart the Ambari Server: 
 ```
 sudo wget https://bintray.com/big-data/rpm/rpm -O /etc/yum.repos.d/bintray-big-data-rpm.repo
 sudo yum -y install zeppelin-ambari-plugin-phd30
 sudo /etc/init.d/ambari-server restart
 ```
-Above will install Zeppelin plugin for PHD30 Hadoop distro. For HDP2.2 install `zeppelin-ambari-plugin-hdp22` and for HDP2.3 install `zeppelin-ambari-plugin-hdp23` instead.
+This installs the Zeppelin plugin for PHD30 Hadoop distro. For HDP2.2 install `zeppelin-ambari-plugin-hdp22` and for HDP2.3 install `zeppelin-ambari-plugin-hdp23` instead.
 
-#### Install Zeppeling Service
+#### Install Zeppelin Service
 1. Login to Ambari server
 2. Open the `Services` view and click on `Actions`/`+Add Services` button.
 3. Select the `Zeppelin Notebook` service from the list and press `Next`.
