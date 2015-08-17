@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.pivotal</groupId>
   <artifactId>zeppelin-ambari-plugin</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <name>zeppelin-ambari-plugin</name>
   <url>http://maven.apache.org</url>
   <build>

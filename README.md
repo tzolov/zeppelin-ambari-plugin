@@ -6,7 +6,7 @@ To embed the Zepplein UI pages within Ambari you can use the [Ambari Webpage Emb
 
 > This project builds upon the excellent work done in the [ambari-zeppelin-service](https://github.com/hortonworks-gallery/ambari-zeppelin-service). The original code was significantly refactored to remove some unnecessary functionality and keep the focus only on the Zeppelin service. All assumptions on pre-installed other services are removed. Also is removed the build-on-the-fly functionality. Instead it is expected that the installer will use a pre-build Zeppelin tarball (default tarball is provided). The plugin installation is simplified and one can install it through a public YUM repository. 
 
-[<img align="left" src="http://img.youtube.com/vi/BrFWXLAVOa4/3.jpg" alt="zeppelin-view" hspace="15" width="70"></img>](https://www.youtube.com/watch?v=BrFWXLAVOa4)
+[<img align="left" src="http://img.youtube.com/vi/BrFWXLAVOa4/3.jpg" alt="zeppelin-view" hspace="10" width="70"></img>](https://www.youtube.com/watch?v=BrFWXLAVOa4)
 The [Zeppelin Ambari Plugin Video](https://www.youtube.com/watch?v=BrFWXLAVOa4) illustrates the capabilities of the plugin. It shows how to install the plugin, how to deploy the Zeppelin service and how to alter its configuration.
 
 ## How to build
@@ -19,7 +19,7 @@ The `build/distributions/` contains the a generic tar.gz as well as RPM pacakges
 
 ## How to Use 
 Install the plugin to Ambari and then deploy the Zeppeling service.
-#### Instal the plugin to Ambari
+#### Install the plugin
 Add the Big-Data YUM repository to your CentOS/RedHat system, install the latest Zeppelin plugin RPM and restart the Ambari Server: 
 ```
 sudo wget https://bintray.com/big-data/rpm/rpm -O /etc/yum.repos.d/bintray-big-data-rpm.repo
