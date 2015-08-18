@@ -6,14 +6,14 @@
   <!-- params for service -->
   <property>
     <name>zeppelin.tarball.url</name>
-    <value>https://dl.dropboxusercontent.com/u/79241625/zeppelin-0.6.0-incubating-SNAPSHOT.tar.gz</value>
+    <value>https://dl.dropboxusercontent.com/u/79241625/zeppelin/zeppelin-0.6.0-incubating-SNAPSHOT.tar.gz</value>
     <description>URL location of pre-build Zeppelin tarball (tar.gz).</description>
   </property> 
 
   <property>
     <name>zeppelin.notebooks.url</name>
-    <value>https://dl.dropboxusercontent.com/u/79241625/notebooks.tar.gz</value>
-    <description>URL of pre-build notebooks (tar.gz).</description>
+    <value>https://dl.dropboxusercontent.com/u/79241625/zeppelin/notebooks.tar.gz</value>
+    <description>URL of pre-build notebook tutorials (tar.gz).</description>
   </property> 
 
   <property>

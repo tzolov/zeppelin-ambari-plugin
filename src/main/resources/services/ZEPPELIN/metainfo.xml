@@ -10,11 +10,11 @@
         interactive and collaborative documents with SQL, Scala and
         more.
       </comment>
-      <version>0.0.7</version>
+      <version>0.0.8</version>
       <components>
         <component>
           <name>ZEPPELIN_MASTER</name>
-          <displayName>Zeppelin Notebook</displayName>
+          <displayName>Zeppelin</displayName>
           <category>MASTER</category>
           <cardinality>1</cardinality>
           <commandScript>
