@@ -18,7 +18,7 @@ buildRpm.enabled = false
 def projectName = "zeppelin-ambari-plugin"
 
 ospackage {
-  version = '0.0.8'
+  version = '0.0.9'
   release = 1
   arch = NOARCH
   os = LINUX
@@ -67,6 +67,12 @@ task phd30Rpm(type: Rpm) {
   from('src/main/resources/services') { into '/var/lib/ambari-server/resources/stacks/PHD/3.0/services' }
 }
 
+task phd33Rpm(type: Rpm) {
+  packageName = projectName + '-phd33'
+  from('src/main/resources/services') { into '/var/lib/ambari-server/resources/stacks/PHD/3.3/services' }
+}
+
+
 task hdp22Rpm(type: Rpm) {
   packageName = projectName + '-hdp22'
   from('src/main/resources/services') { into '/var/lib/ambari-server/resources/stacks/HDP/2.2/services' }
@@ -84,5 +90,5 @@ task distTgz(type: Tar) {
 }
 
 task dist {
-  dependsOn phd30Rpm, hdp22Rpm, hdp23Rpm, distTgz
+  dependsOn phd30Rpm, phd33Rpm, hdp22Rpm, hdp23Rpm, distTgz
 }
